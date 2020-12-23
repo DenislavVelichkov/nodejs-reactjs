@@ -1,0 +1,35 @@
+.Nav {
+  list-style-type: none;
+  margin: auto;
+  padding: 0;
+  background-color: #607588;
+
+  ul {
+    margin: 0;
+
+    li {
+      display: inline-block;
+      vertical-align: middle;
+
+      img {
+        width: 80px;
+        height: 80px;
+        padding: 1em;
+        float: left;
+      }
+
+      a {
+        text-decoration: none;
+        text-transform: uppercase;
+        color: white;
+        font-weight: bold;
+        margin: 0 1em;
+      }
+
+      a:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+  }
+}

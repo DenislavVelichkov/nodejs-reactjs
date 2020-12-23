@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+.App {
+    display: block;
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+
+    main {
+        margin: 0 4em;
+        border-radius: 15px;
+        padding: 2em;
+    }
+
+    @-webkit-keyframes fadeOut {
+        from {
+            opacity: 1;
+        }
+
+        to {
+            opacity: 0;
+        }
+    }
+
+    @keyframes fadeOut {
+        from {
+            opacity: 1;
+        }
+
+        to {
+            opacity: 0;
+        }
+    }
+}
