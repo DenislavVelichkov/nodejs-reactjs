@@ -15,13 +15,13 @@ const App = () => {
         <div className={styles.App}>
             <Router>
                 <header><Nav/></header>
-                <Switch>
-                    <main>
+                <main>
+                    <Switch>
                         <Route path="/cube">
                             <Cube/>
                         </Route>
-                    </main>
-                </Switch>
+                    </Switch>
+                </main>
                 <footer><Footer/></footer>
             </Router>
         </div>
