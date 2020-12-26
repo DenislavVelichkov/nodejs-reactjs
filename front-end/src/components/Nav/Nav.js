@@ -9,10 +9,10 @@ const Nav = () => {
     return (
         <div className={styles.Nav} data-testid="Nav">
             <ul>
-                <li><img class="logo" src={logo} alt="logo"/></li>
+                <li><img className="logo" src={logo} alt="logo"/></li>
                 <li><NavLink to="/">Browse</NavLink></li>
-                <li><NavLink to="/create">Add a Cube</NavLink></li>
-                <li><NavLink to="/about">About</NavLink></li>
+                <li><NavLink to="/create" activeStyle={{color: 'red'}}>Add a Cube</NavLink></li>
+                <li><NavLink to="/about" activeStyle={{color: 'red'}}>About</NavLink></li>
             </ul>
         </div>
     );
