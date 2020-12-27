@@ -1,10 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, {useEffect, useState} from 'react';
 import styles from './Index.module.scss';
 import {Link} from "react-router-dom";
-import {useEffect} from "react";
-import {useState} from "react";
-import cx from 'classnames';
 
 const Index = () => {
     const [cubes, setCubes] = useState([]);

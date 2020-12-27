@@ -1,12 +1,13 @@
+import styles from "./App.module.scss";
+import {Route, Switch} from "react-router-dom";
+import {Suspense} from "react"
 import Nav from "./components/Nav/Nav"
 import Footer from "./components/Footer/Footer";
-import styles from "./App.module.scss";
 import About from "./components/About/About";
 import Index from "./components/Index/Index";
 import Create from "./components/Create/Create";
-import {Route, Switch} from "react-router-dom";
 import NotFound from "./components/NotFound/NotFound";
-import {Suspense} from "react"
+import Details from "./components/Details/Details";
 
 const App = () => {
 
@@ -21,6 +22,7 @@ const App = () => {
                         <Route path="/" exact component={Index}/>
                         <Route path="/create" component={Create}/>
                         <Route path="/about" component={About}/>
+                        <Route path="/details/:cubeId" component={Details}/>
                         <Route component={NotFound}/>
                     </Switch>
                 </Suspense>

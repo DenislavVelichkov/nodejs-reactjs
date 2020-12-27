@@ -4,13 +4,10 @@ import './index.module.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter as Router, Route} from "react-router-dom";
-import { createBrowserHistory } from "history";
-
-const history = createBrowserHistory();
 
 ReactDOM.render(
     <React.StrictMode>
-        <Router history={history}>
+        <Router>
             <Route exact component={App}/>
         </Router>
     </React.StrictMode>,
