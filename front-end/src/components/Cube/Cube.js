@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import styles from './Cube.module.scss';
 
 const Cube = () => (
-  <div className={styles.Cube} data-testid="Cube">
-    Cube Component
-  </div>
+    <div className={styles.Cube} data-testid="Cube">
+        Cube Component
+    </div>
 );
 
 Cube.propTypes = {};

@@ -1,0 +1,20 @@
+.Index {
+  .cubesContainer {
+    display: flex;
+    flex-flow: row wrap;
+    margin-top: 2rem;
+
+    a {
+      color: black;
+    }
+
+    .Cube {
+      display: inline-block;
+    }
+
+    .Cube:not(:last-child) {
+      margin-right: 2rem;
+    }
+  }
+}
+

@@ -1,15 +1,17 @@
-const Cube = require('../models/cube.js');
+const CubeSchema = require('../models/cube.js');
 
 module.exports = {
   getCubes(req, res, next) {
-    Cube.find({})
-      .then(allCubes => console.log(res.json(allCubes)))
+    CubeSchema.find({})
+      .then(allCubes => {
+        res.json(allCubes)
+      })
       .catch(next)
   },
   getCube(req, res, next) {
     const id = req.params.id;
     
-    Cube.findById({ '_id': id }, (err, res) => {
+    CubeSchema.findById({ '_id': id }, (err, res) => {
       if (err) {
         throw err
       }
@@ -18,14 +20,16 @@ module.exports = {
     .catch(next)
   },
   postCreateCube(req, res, next) {
-    Cube.create(req.body)
-      .then(newCube => res.json(newCube))
+    CubeSchema.create(req.body)
+      .then(newCube => {
+        res.json(newCube)
+      })
       .catch(next)
   },
   deleteCube(req, res, next) {
     const id = req.params.id;
 
-    Cube.findByIdAndDelete({ '_id': id }, (err, res) => {
+    CubeSchema.findByIdAndDelete({ '_id': id }, (err, res) => {
       if (err) {
         throw err
       }
