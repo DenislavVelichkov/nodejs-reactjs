@@ -6,8 +6,8 @@ const Index = () => {
     const [cubes, setCubes] = useState([]);
     const [cubesJSON, setCubesJSON] = useState([]);
     const [name, setName] = useState("");
-    const [minDifficulty, setMinDifficulty] = useState(0);
-    const [maxDifficulty, setMaxDifficulty] = useState(0);
+    const [minDifficulty, setMinDifficulty] = useState(1);
+    const [maxDifficulty, setMaxDifficulty] = useState(2);
 
     useEffect(() => {
         fetch('/api/all-cubes')
@@ -46,13 +46,16 @@ const Index = () => {
 
     function findCube() {
         return function (ev: React.FormEvent<HTMLFormElement>) {
-          let filteredCubes =  cubesJSON.reduce((reducer, query) => {
+            let filteredCubes = cubesJSON.reduce((reducer, query) => {
                 if ((query.difficultyLevel >= minDifficulty && query.difficultyLevel <= maxDifficulty)) {
                     reducer.push(query)
+                } else if (query.name.toLowerCase().includes(name.toLowerCase()) && name !== '') {
+                    reducer.push(query)
                 }
+                    return reducer;
+            }, [])
 
-                return reducer;
-            },[])
+            if (filteredCubes.length === 0) {return}
 
             setCubes(filteredCubes.map((cube) =>
                 <div key={cube._id} className={styles.Cube}>
