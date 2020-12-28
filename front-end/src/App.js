@@ -9,29 +9,26 @@ import Create from "./components/Create/Create";
 import NotFound from "./components/NotFound/NotFound";
 import Details from "./components/Details/Details";
 
-const App = () => {
-
-    return (
-        <div className={styles.App}>
-            <header>
-                <Nav/>
-            </header>
-            <main>
-                <Suspense fallback={<div>Loading...</div>}>
-                    <Switch>
-                        <Route path="/" exact component={Index}/>
-                        <Route path="/create" component={Create}/>
-                        <Route path="/about" component={About}/>
-                        <Route path="/details/:cubeId" component={Details}/>
-                        <Route component={NotFound}/>
-                    </Switch>
-                </Suspense>
-            </main>
-            <footer>
-                <Footer/>
-            </footer>
-        </div>
-    );
-}
+const App = () => (
+    <div className={styles.App}>
+        <header>
+            <Nav/>
+        </header>
+        <main>
+            <Suspense fallback={<div>Loading...</div>}>
+                <Switch>
+                    <Route exact path="/" component={Index}/>
+                    <Route path="/create" component={Create}/>
+                    <Route path="/about" component={About}/>
+                    <Route path="/details/:cubeId" component={Details}/>
+                    <Route component={NotFound}/>
+                </Switch>
+            </Suspense>
+        </main>
+        <footer>
+            <Footer/>
+        </footer>
+    </div>
+)
 
 export default App;
