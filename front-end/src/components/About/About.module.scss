@@ -1,5 +1,12 @@
 .About {
+  display: block;
+  margin: auto;
+  background-color: #f3f3f2;
+  padding: 3em;
+
   a {
-    color: black;
+    text-decoration: none;
+    color: #0B2133;
+    font-weight: bold;
   }
 }

@@ -10,7 +10,7 @@ const Cube = ({_id, name, imageURL, description, difficultyLevel}) => (
             <div className={styles.details}>
                 <p><span>Description:</span>{description}</p>
                 <p><span>Difficulty level:</span> {difficultyLevel}</p>
-                <Link className="btn" to="/">Back</Link>
+                <Link className={styles.btn} to="/">Back</Link>
             </div>
     </div>
 );
