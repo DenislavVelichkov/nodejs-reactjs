@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
 import styles from './Create.module.scss';
-import {withRouter} from "react-router-dom";
 
 const Create = (props) => {
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [imageURL, setImageURL] = useState("")
-    const [difficultyLevel, setDifficultyLevel] = useState(0)
+    const [difficultyLevel, setDifficultyLevel] = useState(1)
 
     function submitCube() {
         return function (event: React.MouseEvent<HTMLButtonElement>) {
@@ -69,7 +68,7 @@ const Create = (props) => {
                     <label htmlFor="imageURL">ImageUrl</label>
                     <input type="text" id="imageURL" name="imageURL" value={imageURL} onChange={imgHandler()}/>
                     <label htmlFor="difficultyLevel">Difficulty</label>
-                    <select id="difficultyLevel" name="difficultyLevel" onChange={diffHandler()}>
+                    <select id="difficultyLevel" name="difficultyLevel" defaultChecked={difficultyLevel} onChange={diffHandler()}>
                         <option value="1">1 - Very Easy</option>
                         <option value="2">2 - Easy</option>
                         <option value="3">3 - Medium (Standard 3x3)</option>
@@ -88,4 +87,4 @@ Create.propTypes = {};
 
 Create.defaultProps = {};
 
-export default withRouter(Create);
+export default Create;
