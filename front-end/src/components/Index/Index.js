@@ -45,6 +45,10 @@ const Index = () => {
     }
 
     function findCube() {
+        if (minDifficulty < 0 || maxDifficulty < 0) {
+            alert('Min and Max difficulty level must be positive numbers!')
+        }
+
         return function (ev: React.FormEvent<HTMLFormElement>) {
             let filteredCubes = cubesJSON.reduce((reducer, query) => {
                 if ((query.difficultyLevel >= minDifficulty && query.difficultyLevel <= maxDifficulty)) {

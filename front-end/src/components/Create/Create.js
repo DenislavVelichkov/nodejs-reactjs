@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import styles from './Create.module.scss';
+import {withRouter} from "react-router-dom";
 
-const Create = () => {
+const Create = (props) => {
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [imageURL, setImageURL] = useState("")
@@ -9,6 +10,7 @@ const Create = () => {
 
     function submitCube() {
         return function (event: React.MouseEvent<HTMLButtonElement>) {
+            event.preventDefault()
 
             fetch('/api/create', {
                 method: 'post',
@@ -20,10 +22,10 @@ const Create = () => {
                     difficultyLevel: difficultyLevel
                 })
             })
-                .then()
+                .then(() => {
+                    props.history.push('/')
+                })
                 .catch(err => console.log(err))
-
-            event.preventDefault()
         };
     }
 
@@ -86,4 +88,4 @@ Create.propTypes = {};
 
 Create.defaultProps = {};
 
-export default Create;
+export default withRouter(Create);
