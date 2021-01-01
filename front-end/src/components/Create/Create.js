@@ -11,7 +11,7 @@ const Create = (props) => {
         return function (event: React.MouseEvent<HTMLButtonElement>) {
             event.preventDefault()
 
-            fetch('/api/create', {
+            fetch('/api/create/cube', {
                 method: 'post',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
@@ -58,7 +58,7 @@ const Create = (props) => {
 
     return (
         <div className={styles.Create} data-testid="Create">
-            <h1>Create</h1>
+            <h1>Create Cube</h1>
             <div className="form">
                 <form onSubmit={submitCube()}>
                     <label htmlFor="name">Name</label>
@@ -68,7 +68,10 @@ const Create = (props) => {
                     <label htmlFor="imageURL">ImageUrl</label>
                     <input type="text" id="imageURL" name="imageURL" value={imageURL} onChange={imgHandler()}/>
                     <label htmlFor="difficultyLevel">Difficulty</label>
-                    <select id="difficultyLevel" name="difficultyLevel" defaultChecked={difficultyLevel} onChange={diffHandler()}>
+                    <select id="difficultyLevel"
+                            name="difficultyLevel"
+                            defaultChecked={difficultyLevel}
+                            onChange={diffHandler()}>
                         <option value="1">1 - Very Easy</option>
                         <option value="2">2 - Easy</option>
                         <option value="3">3 - Medium (Standard 3x3)</option>
