@@ -1,16 +1,33 @@
-const {deleteCube, getCube, getCubes, postCreateCube} = require('../controllers/cube-controller');
-const {Router} = require('express');
+const {
+    deleteCube,
+    getCube,
+    getCubes,
+    postCreateCube,
+    postCreateAccessory,
+    attachAccessory,
+    getAccessories
+} = require("../controllers/cube-controller");
+const {Router} = require("express");
 const router = Router();
 
 
 router.route('/all-cubes')
     .get(getCubes);
 
+router.route('/all-accessories')
+    .get(getAccessories);
+
 router.route('/details/:id')
     .get(getCube);
 
-router.route('/create')
+router.route('/create/cube')
     .post(postCreateCube);
+
+router.route('/create/accessory')
+    .post(postCreateAccessory);
+
+router.route('/attach/accessory')
+    .post(attachAccessory);
 
 router.route('/delete/:id')
     .delete(deleteCube);

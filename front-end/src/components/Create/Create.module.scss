@@ -1,4 +1,17 @@
 .Create {
+  button {
+    border: none;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    width: 43%;
+    margin: 12px 12px 12px 6%;
+    border-radius: 4px;
+    background: #607588;
+    color: white;
+  }
 
   form label {
     background: #607588;

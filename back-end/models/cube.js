@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
-const CubeSchema = mongoose.Schema
+const Schema = require('mongoose');
 
-const CubeModel = new CubeSchema({
+const CubeModel = new mongoose.Schema({
   id: { type: String },
   name: { type: String },
   imageURL: { type: String },
   difficultyLevel: { type: Number },
-  description: { type: String }
+  description: { type: String },
+  accessories: [{type: Schema.Types.ObjectId, ref: 'accessory'}]
 })
 
 const Cube = mongoose.model('cube', CubeModel)

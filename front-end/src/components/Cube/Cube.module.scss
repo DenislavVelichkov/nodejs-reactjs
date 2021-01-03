@@ -2,8 +2,8 @@
   display: inline-block;
   border: 1px solid #2b415433;
   background: white;
-  width: 23%;
   vertical-align: top;
+  margin: auto;
 
   &:hover {
     background: #607588;
@@ -48,7 +48,7 @@
   .details {
     display: block;
     margin: auto;
-    width: 50%;
+    width: 100%;
     background-color: #f3f3f2;
     padding: 1em;
   }

@@ -1,19 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Cube.module.scss';
-import {Link} from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 
-const Cube = ({_id, name, imageURL, description, difficultyLevel}) => (
-    <div key={_id} className={styles.Cube} data-testid="Cube">
-        <h1>{name}</h1>
-        <img src={imageURL} alt="selected cube"/>
+const Cube = ({_id, name, imageURL, description, difficultyLevel, ...props}) => {
+
+    function deleteCube(id) {
+        return function (ev: React.MouseEvent<HTMLButtonElement>) {
+            ev.preventDefault()
+
+            fetch(`/api/delete/${id}`, {method: 'delete'})
+                .then(() => {
+                    props.history.push('/')
+                })
+                .catch(err => console.log(err))
+        };
+    }
+
+    return (
+        <div key={_id} className={styles.Cube} data-testid="Cube">
+            <h1>{name}</h1>
+            <img src={imageURL} alt="selected cube"/>
             <div className={styles.details}>
                 <p><span>Description:</span>{description}</p>
                 <p><span>Difficulty level:</span> {difficultyLevel}</p>
                 <Link className={styles.btn} to="/">Back</Link>
+                <button className={styles.btn} onClick={deleteCube(_id)}>Delete</button>
+                <Link className={styles.btn} to={`/attach/accessory/${_id}`}>Attach Accessory</Link>
             </div>
-    </div>
-);
+        </div>
+    );
+}
 
 Cube.propTypes = {
     _id: PropTypes.string,
@@ -25,4 +42,4 @@ Cube.propTypes = {
 
 Cube.defaultProps = {};
 
-export default Cube;
+export default withRouter(Cube);
