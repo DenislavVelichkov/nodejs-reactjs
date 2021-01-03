@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import {CubeContext} from "../../context/CubeContext";
 
 const Index = () => {
-    const [mappedCubes, setMappedCubes] = useState("");
+    const [mappedCubes, setMappedCubes] = useState([]);
     const [name, setName] = useState("");
     const [minDifficulty, setMinDifficulty] = useState(1);
     const [maxDifficulty, setMaxDifficulty] = useState(2);
@@ -18,7 +18,7 @@ const Index = () => {
                 <p><span>Difficulty level:</span> {cube.difficultyLevel}</p>
                 <Link to={`/details/${cube._id}`}>Details</Link>
             </div>));
-    }, [])
+    }, [cubes])
 
     function setNameHandler() {
         return function (ev: React.ChangeEvent<HTMLInputElement>) {

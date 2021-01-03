@@ -1,5 +1,3 @@
-import React from "react";
-
 export function getAllCubes() {
     return fetch('/api/all-cubes')
         .then((response) => response.json())

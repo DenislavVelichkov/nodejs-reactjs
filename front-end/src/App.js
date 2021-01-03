@@ -42,6 +42,4 @@ const App = () => {
     )
 }
 
-App.contextType = CubeContext
-
 export default App;
