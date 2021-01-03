@@ -9,6 +9,13 @@ module.exports = {
             })
             .catch(next)
     },
+    getAccessories(req, res, next) {
+        AccessorySchema.find({})
+            .then(allAccessories => {
+                res.json(allAccessories)
+            })
+            .catch(next)
+    },
     getCube(req, res, next) {
         const id = req.params.id;
 

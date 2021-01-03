@@ -26,6 +26,7 @@ const Cube = ({_id, name, imageURL, description, difficultyLevel, ...props}) => 
                 <p><span>Difficulty level:</span> {difficultyLevel}</p>
                 <Link className={styles.btn} to="/">Back</Link>
                 <button className={styles.btn} onClick={deleteCube(_id)}>Delete</button>
+                <Link className={styles.btn} to={`/attach/accessory/${_id}`}>Attach Accessory</Link>
             </div>
         </div>
     );

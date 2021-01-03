@@ -2,20 +2,19 @@ import React, {useEffect, useState} from 'react';
 import styles from './Details.module.scss';
 import {useParams} from "react-router-dom";
 import Cube from "../Cube/Cube";
+import {getSelectedCube} from "../../services/data-service";
 
 const Details = () => {
     const cubeId = useParams()['cubeId'];
     const [selectedCube, setSelectedCube] = useState([])
 
     useEffect(() => {
-        fetch(`/api/details/${cubeId}`)
-            .then(data => data.json())
+        getSelectedCube(cubeId)
             .then(cube => {
                 setSelectedCube(
                     <Cube {...cube}/>
                 );
             })
-            .catch(err => console.log(err))
     }, [])
 
     return (

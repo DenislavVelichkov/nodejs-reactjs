@@ -4,7 +4,8 @@ const {
     getCubes,
     postCreateCube,
     postCreateAccessory,
-    attachAccessory
+    attachAccessory,
+    getAccessories
 } = require("../controllers/cube-controller");
 const {Router} = require("express");
 const router = Router();
@@ -12,6 +13,9 @@ const router = Router();
 
 router.route('/all-cubes')
     .get(getCubes);
+
+router.route('/all-accessories')
+    .get(getAccessories);
 
 router.route('/details/:id')
     .get(getCube);

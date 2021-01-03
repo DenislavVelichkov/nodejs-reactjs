@@ -1,29 +1,23 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import styles from './Index.module.scss';
 import {Link} from "react-router-dom";
+import {CubeContext} from "../../context/CubeContext";
 
 const Index = () => {
-    const [cubes, setCubes] = useState([]);
-    const [cubesJSON, setCubesJSON] = useState([]);
+    const [mappedCubes, setMappedCubes] = useState("");
     const [name, setName] = useState("");
     const [minDifficulty, setMinDifficulty] = useState(1);
     const [maxDifficulty, setMaxDifficulty] = useState(2);
+    const {cubes} = useContext(CubeContext)
 
     useEffect(() => {
-        fetch('/api/all-cubes')
-            .then(response => response.json())
-            .then(cubes => {
-                setCubesJSON(cubes)
-                setCubes(cubes.map((cube) =>
-                    <div key={cube._id} className={styles.Cube}>
-                        <img src={cube.imageURL} alt="cube"/>
-                        <p>{cube.name}</p>
-                        <p><span>Difficulty level:</span> {cube.difficultyLevel}</p>
-                        <Link to={`/details/${cube._id}`}>Details</Link>
-                    </div>
-                ))
-            })
-            .catch(err => console.log(err))
+        setMappedCubes(cubes.map((cube) =>
+            <div key={cube._id} className={styles.Cube}>
+                <img src={cube.imageURL} alt="cube"/>
+                <p>{cube.name}</p>
+                <p><span>Difficulty level:</span> {cube.difficultyLevel}</p>
+                <Link to={`/details/${cube._id}`}>Details</Link>
+            </div>));
     }, [])
 
     function setNameHandler() {
@@ -46,22 +40,24 @@ const Index = () => {
 
     function findCube() {
         if (minDifficulty < 0 || maxDifficulty < 0) {
-            alert('Min and Max difficulty level must be positive numbers!')
+            return alert('Min and Max difficulty level must be positive numbers!')
         }
 
         return function (ev: React.FormEvent<HTMLFormElement>) {
-            let filteredCubes = cubesJSON.reduce((reducer, query) => {
+            let filteredCubes = cubes.reduce((reducer, query) => {
                 if ((query.difficultyLevel >= minDifficulty && query.difficultyLevel <= maxDifficulty)) {
                     reducer.push(query)
                 } else if (query.name.toLowerCase().includes(name.toLowerCase()) && name !== '') {
                     reducer.push(query)
                 }
-                    return reducer;
+                return reducer;
             }, [])
 
-            if (filteredCubes.length === 0) {return}
+            if (filteredCubes.length === 0) {
+                return
+            }
 
-            setCubes(filteredCubes.map((cube) =>
+            setMappedCubes(filteredCubes.map((cube) =>
                 <div key={cube._id} className={styles.Cube}>
                     <img src={cube.imageURL} alt="cube"/>
                     <p>{cube.name}</p>
@@ -100,7 +96,7 @@ const Index = () => {
                 <input type="submit" value="search"/>
             </form>
             <div className={styles.cubesContainer}>
-                {cubes}
+                {mappedCubes}
             </div>
         </div>
     );
