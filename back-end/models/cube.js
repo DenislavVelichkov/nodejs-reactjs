@@ -7,7 +7,7 @@ const CubeModel = new mongoose.Schema({
   imageURL: { type: String },
   difficultyLevel: { type: Number },
   description: { type: String },
-  accessories: [{type: Schema.Types.ObjectId, ref: 'accessory'}]
+  accessories: [{type: Schema.Types.ObjectId, ref: 'accessory', unique: true}]
 })
 
 const Cube = mongoose.model('cube', CubeModel)

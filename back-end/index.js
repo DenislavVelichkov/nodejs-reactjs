@@ -11,8 +11,8 @@ mongoose.connect(process.env.DB,
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
-    .then(() =>  console.log("Database Connected successfully"))
-    .catch(error => console.log(new Error(error)))
+    .then(() => console.log("Database Connected successfully"))
+    .catch(error => console.log((error)))
 
 //since mongoose promise is depreciated, we override it with node's promise
 mongoose.Promise = global.Promise

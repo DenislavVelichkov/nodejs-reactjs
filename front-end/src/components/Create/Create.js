@@ -1,27 +1,22 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import styles from './Create.module.scss';
+import {CubeContext} from "../../context/CubeContext";
+import {createNewCube} from "../../services/data-service";
 
 const Create = (props) => {
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [imageURL, setImageURL] = useState("")
     const [difficultyLevel, setDifficultyLevel] = useState(1)
+    const {updateCube} = useContext(CubeContext)
 
     function submitCube() {
         return function (event: React.MouseEvent<HTMLButtonElement>) {
             event.preventDefault()
 
-            fetch('/api/create/cube', {
-                method: 'post',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    name: name,
-                    description: description,
-                    imageURL: imageURL,
-                    difficultyLevel: difficultyLevel
-                })
-            })
-                .then(() => {
+            createNewCube(name, description, imageURL, difficultyLevel)
+                .then((newCube) => {
+                    updateCube(newCube)
                     props.history.push('/')
                 })
                 .catch(err => console.log(err))

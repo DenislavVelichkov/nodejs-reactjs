@@ -4,6 +4,7 @@ const CubeSchema = require('../models/cube');
 module.exports = {
     getCubes(req, res, next) {
         CubeSchema.find({})
+            .exec()
             .then(allCubes => {
                 res.json(allCubes)
             })
@@ -11,6 +12,7 @@ module.exports = {
     },
     getAccessories(req, res, next) {
         AccessorySchema.find({})
+            .exec()
             .then(allAccessories => {
                 res.json(allAccessories)
             })
@@ -19,19 +21,15 @@ module.exports = {
     getCube(req, res, next) {
         const id = req.params.id;
 
-        CubeSchema.findById({'_id': id}, (err, res) => {
-            if (err) {
-                throw err
-            }
-        })
+        CubeSchema.findById({'_id': id})
+            .exec()
             .then(selectedCube => res.json(selectedCube))
             .catch(next)
     },
     postCreateCube(req, res, next) {
         CubeSchema.create(req.body)
-            .then(newCube => {
-                res.json(newCube)
-            })
+            .then(newCube => res.json(newCube))
+            .catch((error) => console.log(error))
             .catch(next)
     },
     postCreateAccessory(req, res, next) {
@@ -42,26 +40,22 @@ module.exports = {
             .catch(next)
     },
     attachAccessory(req, res, next) {
-        const {targetID} = req.body.json()
-        console.log(targetID)
+        const {attachToCubeId, accessoryId} = req.body
 
-        CubeSchema.find({_id: targetID})
-            .then(cube => {
-                cube.accessories.push()
-                cube.save()
-            })
+        CubeSchema.updateOne({_id: attachToCubeId}, {
+            $push: {
+                accessories: accessoryId
+            }
+        }).exec()
+            .then((cube) => res.json(cube))
             .catch(next)
     },
     deleteCube(req, res, next) {
         const id = req.params.id;
 
-        CubeSchema.findByIdAndDelete({'_id': id}, (err, res) => {
-            if (err) {
-                throw err
-            }
-
-        })
-            .then(deletedCube => res.json(deletedCube))
+        CubeSchema.findByIdAndDelete({'_id': id})
+            .exec()
+            .then((deletedCube) => res.json(deletedCube))
             .catch(next)
     }
 }

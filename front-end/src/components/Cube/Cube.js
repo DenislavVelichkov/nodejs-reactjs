@@ -1,19 +1,22 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 import styles from './Cube.module.scss';
 import {Link, withRouter} from "react-router-dom";
+import {deleteSelectedCube} from "../../services/data-service";
+import {CubeContext} from "../../context/CubeContext";
 
-const Cube = ({_id, name, imageURL, description, difficultyLevel, ...props}) => {
+const Cube = ({_id, name, imageURL, description, difficultyLevel, accessories, ...props}) => {
+    const {removeCube} = useContext(CubeContext)
 
-    function deleteCube(id) {
-        return function (ev: React.MouseEvent<HTMLButtonElement>) {
+    const deleteCube = (id) => {
+        return (ev: React.MouseEvent<HTMLButtonElement>) => {
             ev.preventDefault()
 
-            fetch(`/api/delete/${id}`, {method: 'delete'})
-                .then(() => {
+            deleteSelectedCube(id)
+                .then((deletedCube) => {
+                    removeCube(deletedCube)
                     props.history.push('/')
                 })
-                .catch(err => console.log(err))
         };
     }
 
@@ -37,7 +40,8 @@ Cube.propTypes = {
     name: PropTypes.string,
     imageURL: PropTypes.string,
     difficultyLevel: PropTypes.number,
-    description: PropTypes.string
+    description: PropTypes.string,
+    accessories: PropTypes.array
 };
 
 Cube.defaultProps = {};

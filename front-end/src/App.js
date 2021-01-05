@@ -10,18 +10,18 @@ import Create from "./components/Create/Create";
 import NotFound from "./components/NotFound/NotFound";
 import Details from "./components/Details/Details";
 import Accessories from "./components/Accessories/Accessories";
-import CubeContextProvider, {CubeContext} from "./context/CubeContext"
+import CubeContextProvider from "./context/CubeContext"
 import AttachAccessory from "./components/AttachAccessory/AttachAccessory";
 
 const App = () => {
 
     return (
-        <CubeContextProvider>
-            <div className={styles.App}>
-                <header>
-                    <Nav/>
-                </header>
-                <main>
+        <div className={styles.App}>
+            <header>
+                <Nav/>
+            </header>
+            <main>
+                <CubeContextProvider>
                     <Suspense fallback={<div>Loading...</div>}>
                         <Switch>
                             <Route path="/" exact component={Index}/>
@@ -33,12 +33,12 @@ const App = () => {
                             <Route component={NotFound}/>
                         </Switch>
                     </Suspense>
-                </main>
-                <footer>
-                    <Footer/>
-                </footer>
-            </div>
-        </CubeContextProvider>
+                </CubeContextProvider>
+            </main>
+            <footer>
+                <Footer/>
+            </footer>
+        </div>
     )
 }
 

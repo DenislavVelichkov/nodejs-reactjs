@@ -1,25 +1,26 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import styles from './Details.module.scss';
 import {useParams} from "react-router-dom";
 import Cube from "../Cube/Cube";
-import {getSelectedCube} from "../../services/data-service";
+import {CubeContext} from "../../context/CubeContext";
+import DisplayAccessory from "../DisplayAccessory/DisplayAccessory";
 
 const Details = () => {
     const cubeId = useParams()['cubeId'];
-    const [selectedCube, setSelectedCube] = useState([])
+    const [selectedCube, setSelectedCube] = useState({})
+    const {cubes} = useContext(CubeContext)
 
     useEffect(() => {
-        getSelectedCube(cubeId)
-            .then(cube => {
-                setSelectedCube(
-                    <Cube {...cube}/>
-                );
-            })
-    }, [])
+        const cube = cubes.find((cube) => cube._id === cubeId)
+        setSelectedCube(cube);
+    }, [cubes])
 
     return (
         <div className={styles.Details} data-testid="Details">
-            {selectedCube}
+            <React.Fragment>
+                <Cube {...selectedCube}/>
+                <DisplayAccessory {...selectedCube}/>
+            </React.Fragment>
         </div>
     );
 }

@@ -1,17 +1,31 @@
-export function getAllCubes() {
-    return fetch('/api/all-cubes')
+export const getAllCubes = async () => {
+    return await fetch('/api/all-cubes')
         .then((response) => response.json())
         .catch(err => console.log(err));
 }
 
-export function getSelectedCube(cubeId) {
-    return fetch(`/api/details/${cubeId}`)
+export const getSelectedCube = async (cubeId) => {
+    return await fetch(`/api/details/${cubeId}`)
         .then((response) => response.json())
         .catch(err => console.log(err))
 }
 
-export function createAccessory(name, imageURL) {
-    return fetch('/api/create/accessory', {
+export const createNewCube = async (name, description, imageURL, difficultyLevel) => {
+    return await fetch('/api/create/cube', {
+        method: 'post',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            name: name,
+            description: description,
+            imageURL: imageURL,
+            difficultyLevel: difficultyLevel
+        })
+    }).then((response) => response.json())
+        .catch(err => console.log(err))
+}
+
+export const createAccessory = async (name, imageURL) => {
+    return await fetch('/api/create/accessory', {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -21,19 +35,28 @@ export function createAccessory(name, imageURL) {
     }).catch(err => console.log(err))
 }
 
-export function attachAccessory(targetId) {
-   return  fetch('/api/attach/accessory', {
+export const attachAccessory = async (targetCubeId, accessoryId) => {
+    return await fetch('/api/attach/accessory', {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-            attach: targetId
+            attachToCubeId: targetCubeId,
+            accessoryId: accessoryId
         })
     })
-       .catch((error) => console.log(error))
-}
-
-export function getAllAccessories() {
-    return fetch('/api/all-accessories')
         .then((response) => response.json())
         .catch((error) => console.log(error))
+}
+
+export const getAllAccessories = async () => {
+    return await fetch('/api/all-accessories')
+        .then((response) => response.json())
+        .catch((error) => console.log(error))
+}
+
+export const deleteSelectedCube = async (id) => {
+    return await fetch(`/api/delete/${id}`,
+        {method: 'delete'})
+        .then((response) => response.json())
+        .catch(err => console.log(err))
 }

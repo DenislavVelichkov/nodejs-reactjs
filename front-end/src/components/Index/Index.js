@@ -11,34 +11,28 @@ const Index = () => {
     const {cubes} = useContext(CubeContext)
 
     useEffect(() => {
-        setMappedCubes(cubes.map((cube) =>
-            <div key={cube._id} className={styles.Cube}>
-                <img src={cube.imageURL} alt="cube"/>
-                <p>{cube.name}</p>
-                <p><span>Difficulty level:</span> {cube.difficultyLevel}</p>
-                <Link to={`/details/${cube._id}`}>Details</Link>
-            </div>));
+        setMappedCubes(cubes.map((cube) => renderCube(cube)));
     }, [cubes])
 
-    function setNameHandler() {
+    const setNameHandler = () => {
         return function (ev: React.ChangeEvent<HTMLInputElement>) {
             setName(ev.target.value)
         };
     }
 
-    function minDifficultyHandler() {
+    const minDifficultyHandler = () => {
         return function (ev: React.ChangeEvent<HTMLInputElement>) {
             setMinDifficulty(ev.target.value)
         };
     }
 
-    function maxDifficultyHandler() {
+    const maxDifficultyHandler = () => {
         return function (ev: React.ChangeEvent<HTMLInputElement>) {
             setMaxDifficulty(ev.target.value)
         };
     }
 
-    function findCube() {
+    const findCube = () => {
         if (minDifficulty < 0 || maxDifficulty < 0) {
             return alert('Min and Max difficulty level must be positive numbers!')
         }
@@ -57,17 +51,21 @@ const Index = () => {
                 return
             }
 
-            setMappedCubes(filteredCubes.map((cube) =>
-                <div key={cube._id} className={styles.Cube}>
-                    <img src={cube.imageURL} alt="cube"/>
-                    <p>{cube.name}</p>
-                    <p><span>Difficulty level:</span> {cube.difficultyLevel}</p>
-                    <Link to={`/details/${cube._id}`}>Details</Link>
-                </div>
-            ))
+            setMappedCubes(filteredCubes.map((cube) => renderCube(cube)))
 
             ev.preventDefault()
         };
+    }
+
+    const renderCube = (cube) =>{
+        return (
+            <div key={cube._id} className={styles.Cube}>
+                <img src={cube.imageURL} alt="cube"/>
+                <p>{cube.name}</p>
+                <p><span>Difficulty level:</span> {cube.difficultyLevel}</p>
+                <Link to={`/details/${cube._id}`}>Details</Link>
+            </div>
+        )
     }
 
     return (
